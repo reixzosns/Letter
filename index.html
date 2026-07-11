@@ -13,6 +13,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
         .img {
             position: relative;
@@ -33,27 +35,78 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, opacity 0.5s ease;
             transform-origin: center;
             cursor: pointer;
             z-index: 2;
             display: block;
         }
-        #red.expanded {
-            transform: translate(-50%, -50%) scale(10);
+        #red.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        .message-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            z-index: 3;
+        }
+        .message-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .message-box {
+            color: white;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6;
+            white-space: pre-line;
+            padding: 20px;
         }
     </style>
     <body>
         <div class="img">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZZKvK4Zv-WBQBfrnvQ6ZXPmUrLH8i6BcosD-Izl5UbA&s=10" alt="Birthday Image">
-            <a id="red" href="button.html"></a>
+            <button id="red" type="button" aria-label="Open birthday message"></button>
+        </div>
+
+        <div class="message-overlay" id="messageOverlay">
+            <div class="message-box">
+Hi Tyrese Happy Birthday!
+
+I know that you are mad at me because of what I did and I want you to know that after you push me away and left me, I realized that love is not always happy, sometimes it’s not and I realized that you are  with some hard problem that time and i’m really sorry if ilang beses akong nag r-reach out sayo that time and nasabi kopa pala na last na reach out kona yung nakaraan pero hindi ko talaga kaya e, nag try akong mag entertain ng ibang babae kasi hinahanap-hanap ko yung piling mo. And tinigilan kona yon kasi wala e hindi ko mahanap yung piling mo sa iba.
+
+And alam mo naman siguro na after ng lahat ay binalik ko lahat ng bad habits ko kasi akala ko yun lang yung makakatulong sakin para makalimutan kita pero wala e hindi talaga kita makalimutan Gwen. I really love you gwen and sana alam mo yon :)) And even though wala na tayong communication sa isa’t isa i’m always here waiting for you and sana maayos natin to pero huwag muna ngayon, alam ko marami kapa kasing pinagdadaanan:))
+
+Hindi kita pinipilit na makipag ayos sakin gwen, I just have high hopes na makikipag ayos ka sakin. I really miss you gwen and i’m really sorry kung pati mga friends mo may galit sakin. Especially kay lars i’m really sorry kasi yung nararamdaman kolang iniisip ko that time and hindi ko iniisip yung sayo i’m really sorry for that Gwen :))
+
+I want you to know that i’m still keeping my promise for you even though I don’t have any communication with you in my all socmed. I’m here Gwen, I’m always waiting and longing for you. I just have a little hope that you and I will meet again and be  the best version of ourselves thats all, I love you and i’m really sorry gwen.
+
+Sana matupad mo yung biggest dream mo hindi para sa sarili mo kundi para sa family mo, which is being a lawyer. Naniniwala ako sayo gwen na one day, isa kanang lisensiyadong abogada at patuloy kitang susuportahan hanggang sa
+makamit mo yon. Ayun langg, i’m really sorry gwen and I love you.
+
+Happy Birthday Gwen!!🎊
+            </div>
         </div>
 
         <script>
             const circle = document.getElementById('red');
-            circle.addEventListener('click', function (event) {
-                event.preventDefault();
-                this.classList.toggle('expanded');
+            const overlay = document.getElementById('messageOverlay');
+
+            circle.addEventListener('click', function () {
+                circle.classList.add('hidden');
+                overlay.classList.add('show');
             });
         </script>
     </body>
