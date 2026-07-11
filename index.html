@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Happy Birthday, Tyrese!</title>
+    </head>
+    <style>
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .img {
+            position: relative;
+            display: inline-block;
+        }
+        .img img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        #red {
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            border: 2px solid red;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.5s ease;
+            transform-origin: center;
+            cursor: pointer;
+            z-index: 2;
+            display: block;
+        }
+        #red.expanded {
+            transform: translate(-50%, -50%) scale(10);
+        }
+    </style>
+    <body>
+        <div class="img">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZZKvK4Zv-WBQBfrnvQ6ZXPmUrLH8i6BcosD-Izl5UbA&s=10" alt="Birthday Image">
+            <a id="red" href="button.html"></a>
+        </div>
+
+        <script>
+            const circle = document.getElementById('red');
+            circle.addEventListener('click', function (event) {
+                event.preventDefault();
+                this.classList.toggle('expanded');
+            });
+        </script>
+    </body>
+</html>
